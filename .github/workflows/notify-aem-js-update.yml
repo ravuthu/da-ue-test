@@ -1,0 +1,21 @@
+name: Notify aem.js Update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/aem.js'
+  workflow_dispatch: # Allow manual trigger for testing
+
+jobs:
+  notify-consumers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger sync in ravuthu/da-ssb
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.SYNC_PAT }}
+          repository: ravuthu/da-ssb
+          event-type: sync-aem-js
+          client-payload: '{"source_repo": "${{ github.repository }}", "source_sha": "${{ github.sha }}"}'
