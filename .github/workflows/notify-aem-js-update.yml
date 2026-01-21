@@ -3,7 +3,7 @@ name: Notify aem.js Update
 on:
   push:
     branches:
-      - main
+      - dev
     paths:
       - 'scripts/aem.js'
   workflow_dispatch: # Allow manual trigger for testing
